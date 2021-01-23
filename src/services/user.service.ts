@@ -1,4 +1,4 @@
-import http from "../utils/http.util";
+import http, {AfterResponse, PromiseAllWithAfterResponse} from "../utils/http.util";
 import {UserInfo} from "../contexts/UserContext";
 import {AccessCodeMap} from "../components/AuthRoute";
 
@@ -9,18 +9,20 @@ export const getUserAccessCodeService = () => {
   return http.get<string[]>('/user/getAccessCode');
 };
 
-export const getInitializeUserService = () => {
-  return Promise.all([
+export const getInitializeUserService = async (): Promise<AfterResponse<UserInfo>> => {
+  const [err, data] = await PromiseAllWithAfterResponse<UserInfo | string[]>([
     getUserInfoService(),
-    getUserAccessCodeService(),
-  ]).then(([user, accessCodeList]) => {
+    getUserAccessCodeService()]
+  );
+  const [userInfo, accessCodeList] = data;
+  const accessCodeMap: AccessCodeMap = {};
+  if (!err) {
     // 权限，用户信息可在此注入
-    const accessCodeMap: AccessCodeMap = {};
-    accessCodeList.forEach(accessCode => {
+    (accessCodeList as string[]).forEach(accessCode => {
       accessCodeMap[accessCode] = true;
-    })
-    return {...user, accessCodeMap};
-  });
+    });
+  }
+  return [err, {...userInfo, accessCodeMap}];
 }
 export const userLoginService = () => {
   return http.post<{ token: string }>('/login');

@@ -15,8 +15,11 @@ const Index: React.FC = () => {
   const inputRef = useRef<Input | null>(null);
   const handleFinish = async (values: LoginForm) => {
     console.log(values);
-    const result = await userLoginService();
-    TokenUtil.set(result.token);
+    const [err, data] = await userLoginService();
+    if (err) {
+      return err.showAlert();
+    }
+    TokenUtil.set(data.token);
     history.replace('/');
   }
   useEffect(() => {

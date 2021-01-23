@@ -10,7 +10,7 @@ export enum UserActionType {
 }
 
 export interface UserInfo {
-  username: string;
+  username?: string;
   accessCodeMap?: AccessCodeMap;
 }
 

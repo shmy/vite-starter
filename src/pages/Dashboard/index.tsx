@@ -9,7 +9,7 @@ import {getInitializeUserService} from "../../services/user.service";
 import history from '../../utils/history.util'
 import styles from "./index.module.scss";
 import clsx from "clsx";
-import routes, { mapRoutes} from "../routes";
+import routes, {mapRoutes} from "../routes";
 import Header from "../../components/Header/Header";
 
 
@@ -24,38 +24,37 @@ const DashboardSkeleton: React.FC = () => {
 };
 
 const Index: React.FC = () => {
-  const [checking, setChecking] = useState(false);
+  const [checking, setChecking] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
   const [state, dispatch] = useReducer(userReducer, {username: ''});
   const decidedRoutes = useMemo(() => {
     return mapRoutes(routes, state.accessCodeMap)
   }, [state]);
+  const handleInitial = async () => {
+    const [err, data] = await getInitializeUserService();
+    if (err) {
+      history.replace('/login');
+      return;
+    }
+    dispatch({type: UserActionType.UPDATE, payload: data});
+    setChecking(false);
+  };
   useEffect(() => {
     if (!TokenUtil.has()) {
       history.replace('/login');
-      setChecking(true);
       return;
     }
-    getInitializeUserService()
-      .then((data) => {
-        // 权限，用户信息可在此注入
-        dispatch({type: UserActionType.UPDATE, payload: data});
-      })
-      .catch(() => {
-        history.replace('/login');
-      })
-      .finally(() => {
-        setChecking(true);
-      })
+    handleInitial();
   }, []);
-  if (!checking) {
+  if (checking) {
     return <DashboardSkeleton/>;
   }
   return <UserContext.Provider value={[state, dispatch]}>
     <Layout style={{height: '100vh'}}>
-      <Header />
+      <Header/>
       <Layout>
-        <Layout.Sider collapsible collapsed={collapsed} onCollapse={collapsed => setCollapsed(collapsed)} className={styles.sideMenu}>
+        <Layout.Sider collapsible collapsed={collapsed} onCollapse={collapsed => setCollapsed(collapsed)}
+                      className={styles.sideMenu}>
           <SideMenu/>
         </Layout.Sider>
         <Layout.Content className={styles.routerOutlet}>
