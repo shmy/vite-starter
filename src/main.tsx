@@ -1,9 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {Router} from 'react-router-dom'
-import 'antd/lib/style/index.css'
-import 'flex.css/dist/data-flex.css'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Router} from 'react-router-dom';
+import 'antd/lib/style/index.css';
+import 'flex.css/dist/data-flex.css';
+import './styles/index.scss';
+import App from './App';
 import history from './utils/history.util'
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
