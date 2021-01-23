@@ -1,0 +1,33 @@
+{
+  "name": "vite-starter",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "ahooks": "^2.9.4",
+    "antd": "^4.10.3",
+    "axios": "^0.21.1",
+    "clsx": "^1.1.1",
+    "flex.css": "^1.1.7",
+    "history": "^4.10.1",
+    "i18next": "^19.8.4",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-i18next": "^11.8.5",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/mockjs": "^1.0.3",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "@vitejs/plugin-react-refresh": "^1.1.0",
+    "mockjs": "^1.1.0",
+    "sass": "^1.32.5",
+    "typescript": "^4.1.2",
+    "vite": "^2.0.0-beta.35",
+    "vite-plugin-imp": "^2.0.2"
+  }
+}

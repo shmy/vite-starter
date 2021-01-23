@@ -1,0 +1,29 @@
+.skeleton {
+  background: linear-gradient(90deg, hsla(0, 0%, 74.5%, .2) 25%, hsla(0, 0%, 50.6%, .24) 37%, hsla(0, 0%, 74.5%, .2) 63%);
+  background-size: 400% 100%;
+  &.animated {
+    animation: skeleton-loading 1.4s ease infinite;
+  }
+  &.content {
+    margin: $padding-lager;
+    box-sizing: border-box;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+.router-outlet {
+  padding: $padding-lager;
+  box-sizing: border-box;
+}
+.side-menu {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
