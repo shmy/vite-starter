@@ -1,13 +1,23 @@
 import Axios, {AxiosRequestConfig} from 'axios';
+import QProgress from 'qier-progress';
 import './mock.util';
-
+const qprogress = new QProgress();
 const instance = Axios.create({
   baseURL: '/api'
 });
 
+instance.interceptors.request.use((request) => {
+  qprogress.start();
+  return request;
+}, error => {
+  //
+});
 instance.interceptors.response.use((response) => {
   console.info(response.config.url, response.data);
+  qprogress.finish();
   return response.data;
+}, error => {
+  qprogress.finish();
 });
 class http {
   static request<T>(config: AxiosRequestConfig): Promise<T> {

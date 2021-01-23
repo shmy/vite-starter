@@ -8,9 +8,9 @@ import LogoImage from '../../assets/images/logo.png';
 const Header: React.FC = () => {
   const history = useHistory();
   return <Layout.Header className={styles.header} data-flex="dir:left cross:center">
-    <img src={LogoImage} className={styles.logo}></img>
+    <img src={LogoImage} className={styles.logo} />
     <div data-flex-box="1"></div>
-    <Dropdown overlay={<Menu>
+    <Dropdown placement="bottomLeft" overlay={<Menu>
       <Menu.Item onClick={() => history.replace('/login')}>
         <PoweroffOutlined />退出登录
       </Menu.Item>
