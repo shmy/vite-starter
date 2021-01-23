@@ -23,7 +23,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         // 注入变量
-        additionalData(content) {
+        additionalData(content: string) {
           const files = ['./src/styles/variables.scss'];
           return files.map(file => fs.readFileSync(file)).join('\r\n') + content;
         }

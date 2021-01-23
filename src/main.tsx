@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router} from 'react-router-dom';
 import 'antd/lib/style/index.css';
+import 'antd/lib/tooltip/style/index.css';
 import 'flex.css/dist/data-flex.css';
 import './styles/index.scss';
 import App from './App';

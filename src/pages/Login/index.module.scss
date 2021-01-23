@@ -6,12 +6,12 @@
 .login-wrap {
   height: 60vh;
   width: 800px;
-  background-color: #fff;
-  padding: 24px;
+  background-color: $color-white;
+  padding: $padding-lager;
   border-radius: 10px;
 }
 .form {
   width: 100%;
-  padding: 0 24px;
+  padding: 0 $padding-lager;
   box-sizing: border-box;
 }
